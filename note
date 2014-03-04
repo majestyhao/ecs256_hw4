@@ -1,3 +1,67 @@
 R2 shows the linear relationship between the independent variables and the dependent variable. It is defined as 1−SSE/SSTO which is the sum of squared errors divided by the total sum of squares. SSTO=SSE+SSR which are the total error and total sum of the regression squares. As independent variables are added SSR will continue to rise (and since SSTO is fixed) SSE will go down and R2 will continually rise irrespective of how valuable the variables you added are.
 
 The Adjusted R2 is attempting to account for statistical shrinkage. Models with tons of predictors tend to perform better in sample than when tested out of sample. The adjusted R2 "penalizes" you for adding the extra predictor variables that don't improve the existing model. It can be helpful in model selection. Adjusted R2 will equal R2 for one predictor variable. As you add variables, it will be smaller than R2.
+
+ar2(pm[,9], pm[, 1:8])
+
+for (i in 1:sampleN) {
+  for (j in 1:pN + 1) {
+    if (j == 1) {
+      Yh[i] <- lmout$coefficients[j] # intercept
+    } else {
+      Yh[i] <- Yh[i] + lmout$coefficients[j] * X[i, j - 1]
+    }       
+  }
+}
+
+# print(summary(lmout))
+# Yh <- rep(0, sampleN) # Y-hat
+Yh <- rep(lmout$coefficients[1], sampleN)
+# print(Yh[2])
+if (pN != 1) {
+  for (i in 2:pN + 1) {
+    # print(lmout$coefficients[i])
+    Yh = Yh + lmout$coefficients[i] * X[, i - 1]
+  }
+} else {
+  Yh = Yh + lmout$coefficients[2] * X[, 1]
+}
+r2 <- 1 - sum((Y - Yh) ^ 2)/sum((Y - mean(Y)) ^ 2)
+ar2 <- 1 - (1 - r2) * (sampleN - 1)/(sampleN - pN - 1) # adjusted r2
+
+counter <- 1
+      X <- cbind(rep(0, pN - ncol(drop)))
+      # X <- Xb
+      # X[, i] <- NULL # NULL is incorrect...why?
+      flag <- FALSE
+      for (j in 1:pN) {
+        for(k in 1:(ncol(drop) - 1)) {
+          if(k != 0 && (j == drop[, k] || j == i))
+            flag <- TRUE
+        }
+        if (flag == FALSE) {
+          X[counter] <-  Xb[j]
+          counter <- counter + 1
+        }
+        flag <- FALSE
+      }
+
+      # if (printdel == T) {           
+        if ((PAC[i]/pac >= 1 + k)) {
+          cat("reserve ")
+          cat(i)
+          cat(": ")
+          print(PAC[i])
+        } else {
+          # delete the predicator
+          # Xb <- X
+          pac <- PAC[i]
+          drop <- cbind(drop, i)
+          print(ncol(drop))
+          cat("delete ")
+          cat(i)
+          cat(": ")
+          cat(PAC[i])         
+          cat("\n")
+        }                                
+      # } 
