@@ -15,17 +15,19 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
   PAC <- rep(0, ncol(X) + 1)
   pN <- ncol(X)
   Xb <- X # backup for X
-  drop <- cbind(0) # predicator for drop
-  startPoint <- pN/2 # why start from here..
+  # drop <- cbind(0) # predicator for drop
+  drop <- c(rep(FALSE, pN))
   delFlag <- FALSE
   conFlag <- TRUE
-  i <- startPoint # company with startpoint
-  reserve <- NULL # print result
+  maxT <- 0 # Pr(>|t|)
+  i <- 1
   
   if (identical(predacc, ar2)) {
-    PAC[pN + 1] <- ar2(Y, X)
+    PAC[pN + 1] <- ar2(Y, X)$adj.r.squared
+    maxT <- match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1
   } else {
-    PAC[pN + 1] <- aiclogit(Y, X)
+    PAC[pN + 1] <- aiclogit(Y, X)$aic
+    maxT <- match(max(aiclogit(Y, X)$coefficients[, 4]), aiclogit(Y, X)$coefficients[, 4]) - 1
   }
   cat("full outcome = ")
   cat(PAC[pN + 1])
@@ -33,62 +35,77 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
   cat("\n")
   
   while(conFlag) { 
-    if (i == startPoint - 1)
+    if (i == pN)
       conFlag <- FALSE
     # reconstruct/recombine X
     X <- NULL
     # X <- Xb
     # X[, i] <- NULL # NULL is incorrect...why?
-    flag <- FALSE
+    drop[maxT] <- TRUE
     for (j in 1:pN) {
-      if (j == i)
-        flag <- TRUE
-      if (ncol(drop) > 1) {
-        for(m in 2:ncol(drop)) {
-          if (j == drop[1, m]) {
-            flag <- TRUE
-          }
-        }
-      }
-      if (flag == FALSE) {
-        X <- cbind(X, Xb[, j])
-      }
-      flag <- FALSE       
+      if (drop[j] == FALSE) 
+        X <- cbind(X, Xb[, j])      
     }
     
-    if (identical(predacc, ar2)) {
-      PAC[i] <- ar2(Y, X)
-      if (PAC[i]/pac >= 1 - k) {
+    if (identical(predacc, ar2)) {      
+      # mname <- rownames(ar2(Y, X)$coefficients)[match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1]
+      # print(as.name(mname))
+      PAC[maxT] <- ar2(Y, X)$adj.r.squared
+      nmaxT <- match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1      
+      counter <- 1
+      for (m in 1:pN) {
+        if (drop[m] == FALSE) {
+          if (counter == nmaxT) {
+            nmaxT <- m
+            break
+          }
+          counter <- counter + 1
+        }
+      }
+      
+      if (PAC[maxT]/pac >= 1 - k) {
         delFlag <- TRUE
       } else {
-        reserve <- c(reserve, i)
+        drop[maxT] <- FALSE
       } 
     } else {
-      PAC[i] <- aiclogit(Y, X)
-      if (PAC[i]/pac < 1 + k) {
+      PAC[maxT] <- aiclogit(Y, X)$aic
+      nmaxT <- match(max(aiclogit(Y, X)$coefficients[, 4]), aiclogit(Y, X)$coefficients[, 4]) - 1
+      counter <- 1
+      for (m in 1:pN) {
+        if (drop[m] == FALSE) {          
+          if (counter == nmaxT) {
+            nmaxT <- m
+            break
+          }
+          counter <- counter + 1
+        }
+      }
+      
+      if (PAC[maxT]/pac < 1 + k) {
         delFlag <- TRUE
-      } else {
-        reserve <- c(reserve, i)   
+      } else {  
+        drop[maxT] <- FALSE
       }
     }
     
     if (delFlag == TRUE) {
       # delete the predicator
       # Xb <- X
-      pac <- PAC[i]
-      drop <- cbind(drop, i)
+      pac <- PAC[maxT]
       cat("deleted ")
-      cat(i)
+      cat(maxT)
       cat(": \n new outcome: ")
-      cat(PAC[i])         
+      cat(PAC[maxT])         
       cat("\n")
     }  
     delFlag <- FALSE
     i <- i + 1
-    if (i == pN + 1)
-      i <- 1
+    maxT <- nmaxT
   } 
-  print(reserve)
+  for (i in 1:pN) 
+    if (drop[i] == FALSE)
+      cat(i)
 }
 
 # adjusted R^2
@@ -105,8 +122,9 @@ ar2 <- function(Y, X) {
     }
   }
   lmout <- summary(lm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
-                        X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10]))  
-  return(lmout$adj.r.squared) 
+                        X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10]))
+  
+  return(lmout) 
 }
 
 aiclogit <- function(Y, X) {
@@ -120,10 +138,10 @@ aiclogit <- function(Y, X) {
       X <- cbind(X, rep(0, sampleN))
     }
   }
-  glmout <- glm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
-                  X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10], family = binomial)
-  aic <- summary(glmout)$aic # AIC(glmout)
-  return(aic) # well, just habbit..
+  glmout <- summary(glm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
+                          X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10], family = binomial))
+  # aic <- summary(glmout)$aic # AIC(glmout)
+  return(glmout) # well, just habbit..
 }
 
 
