@@ -10,10 +10,11 @@ X <- NULL
 # X <- cbind(X, pm[, 1], pm[, 2], pm[, 6], pm[, 7])
 X <- cbind(X, pm[, 1], pm[, 2], pm[, 3], pm[, 6], pm[, 7], pm[,8])
 # print(ncol(X))
+summary(lm(Y ~ X[, 2]))
 
 
 
 # X[, 4] = NULL 
 # X[, 5] = NULL
-print(aiclogit(Y, X))
+# print(aiclogit(Y, X))
 

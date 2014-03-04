@@ -15,12 +15,12 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
   PAC <- rep(0, ncol(X) + 1)
   pN <- ncol(X)
   Xb <- X # backup for X
-  drop <- cbind(0)
-  startPoint <- pN/2
+  drop <- cbind(0) # predicator for drop
+  startPoint <- pN/2 # why start from here..
   delFlag <- FALSE
   conFlag <- TRUE
-  i <- startPoint
-  reserve <- NULL
+  i <- startPoint # company with startpoint
+  reserve <- NULL # print result
   
   if (identical(predacc, ar2)) {
     PAC[pN + 1] <- ar2(Y, X)
@@ -98,14 +98,14 @@ ar2 <- function(Y, X) {
   # then call summary() to returns the R^2
   pN <- ncol(X) # less function call.. predictor number
   sampleN <- nrow(X) # sample size
-  residualCol <- 8 - pN
+  residualCol <- 10 - pN
   if (residualCol != 0) {
     for (i in 1:residualCol) {
       X <- cbind(X, rep(0, sampleN))
     }
   }
   lmout <- summary(lm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
-                        X[, 6] + X[, 7] + X[, 8]))  
+                        X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10]))  
   return(lmout$adj.r.squared) 
 }
 
@@ -114,14 +114,14 @@ aiclogit <- function(Y, X) {
   # summary() for the logistic model, AIC value returned
   pN <- ncol(X) # less function call..
   sampleN <- nrow(X)
-  residualCol <- 8 - pN
+  residualCol <- 10 - pN
   if (residualCol != 0) {
     for (i in 1:residualCol) {
       X <- cbind(X, rep(0, sampleN))
     }
   }
   glmout <- glm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
-                  X[, 6] + X[, 7] + X[, 8], family = binomial)
+                  X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10], family = binomial)
   aic <- summary(glmout)$aic # AIC(glmout)
   return(aic) # well, just habbit..
 }
