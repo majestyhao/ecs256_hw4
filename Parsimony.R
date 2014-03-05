@@ -15,94 +15,89 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
   PAC <- rep(0, ncol(X) + 1)
   pN <- ncol(X)
   Xb <- X # backup for X
-  # drop <- cbind(0) # predicator for drop
-  drop <- c(rep(FALSE, pN))
+  # drop <- cbind(0) 
+  drop <- c(rep(FALSE, pN)) # predicator for drop
   delFlag <- FALSE
   conFlag <- TRUE
-  maxT <- 0 # Pr(>|t|)
-  i <- 1
+  minP <- 0 # min PAC change
   
   if (identical(predacc, ar2)) {
     PAC[pN + 1] <- ar2(Y, X)$adj.r.squared
-    maxT <- match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1
+    minP <- pN + 1
   } else {
     PAC[pN + 1] <- aiclogit(Y, X)$aic
-    maxT <- match(max(aiclogit(Y, X)$coefficients[, 4]), aiclogit(Y, X)$coefficients[, 4]) - 1
+    minP <- pN + 1
   }
   cat("full outcome = ")
   cat(PAC[pN + 1])
   pac <- PAC[pN + 1]
   cat("\n")
   
-  while(conFlag) { 
-    if (i == pN)
-      conFlag <- FALSE
+  for (it in 1: pN) {  
     # reconstruct/recombine X
-    X <- NULL
+    Xb2 <- NULL
     # X <- Xb
     # X[, i] <- NULL # NULL is incorrect...why?
-    drop[maxT] <- TRUE
     for (j in 1:pN) {
       if (drop[j] == FALSE) 
-        X <- cbind(X, Xb[, j])      
+        Xb2 <- cbind(Xb2, Xb[, j])      
     }
+    pac <- rep(0, ncol(Xb2))
     
-    if (identical(predacc, ar2)) {      
-      # mname <- rownames(ar2(Y, X)$coefficients)[match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1]
-      # print(as.name(mname))
-      PAC[maxT] <- ar2(Y, X)$adj.r.squared
-      nmaxT <- match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1      
-      counter <- 1
-      for (m in 1:pN) {
-        if (drop[m] == FALSE) {
-          if (counter == nmaxT) {
-            nmaxT <- m
-            break
-          }
-          counter <- counter + 1
-        }
+    for (i in 1:ncol(Xb2)) {
+      # reconstruct/recombine X
+      X <- NULL
+      for (j in 1:ncol(Xb2)) {
+        if (j != i) 
+          X <- cbind(X, Xb2[, j])      
       }
       
-      if (PAC[maxT]/pac >= 1 - k) {
-        delFlag <- TRUE
+      if (identical(predacc, ar2)) {      
+        # mname <- rownames(ar2(Y, X)$coefficients)[match(max(ar2(Y, X)$coefficients[, 4]), ar2(Y, X)$coefficients[, 4]) - 1]
+        # print(as.name(mname))
+        pac[i] <- ar2(Y, X)$adj.r.squared
       } else {
-        drop[maxT] <- FALSE
+        pac[i] <- aiclogit(Y, X)$aic              
+      }
+    }
+        
+    if (identical(predacc, ar2)) {
+      nminP <- match(max(pac), pac)
+      if (pac[nminP]/PAC[minP] >= 1 - k) {
+        delFlag <- TRUE
       } 
     } else {
-      PAC[maxT] <- aiclogit(Y, X)$aic
-      nmaxT <- match(max(aiclogit(Y, X)$coefficients[, 4]), aiclogit(Y, X)$coefficients[, 4]) - 1
-      counter <- 1
-      for (m in 1:pN) {
-        if (drop[m] == FALSE) {          
-          if (counter == nmaxT) {
-            nmaxT <- m
-            break
-          }
-          counter <- counter + 1
-        }
-      }
-      
-      if (PAC[maxT]/pac < 1 + k) {
+      nminP <- match(min(pac), pac)
+      if (pac[nminP]/PAC[minP] < 1 + k) {
         delFlag <- TRUE
-      } else {  
-        drop[maxT] <- FALSE
       }
     }
-    
+    counter <- 1
+    for (m in 1:pN) {
+      if (drop[m] == FALSE) {          
+        if (counter == nminP) {
+          nminP <- m
+          break
+        }
+        counter <- counter + 1
+      }
+    }
+    PAC[nminP] <- pac[counter]
+       
     if (delFlag == TRUE) {
       # delete the predicator
       # Xb <- X
-      pac <- PAC[maxT]
+      drop[nminP] = TRUE
+      minP <- nminP
       cat("deleted ")
-      cat(maxT)
+      cat(nminP)
       cat(": \n new outcome: ")
-      cat(PAC[maxT])         
+      cat(PAC[nminP])         
       cat("\n")
     }  
-    delFlag <- FALSE
-    i <- i + 1
-    maxT <- nmaxT
+    delFlag <- FALSE      
   } 
+  
   for (i in 1:pN) 
     if (drop[i] == FALSE)
       cat(i)
