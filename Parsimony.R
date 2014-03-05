@@ -94,7 +94,9 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
       cat(": \n new outcome: ")
       cat(PAC[nminP])         
       cat("\n")
-    }  
+    }  else {
+      break
+    }
     delFlag <- FALSE      
   } 
   
@@ -118,6 +120,7 @@ ar2 <- function(Y, X) {
   }
   lmout <- summary(lm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
                         X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10]))
+  # or: lmout <- summary(lm(Y ~ ., data = X , family = binomial)), if X is a data frame
   
   return(lmout) 
 }
@@ -135,6 +138,7 @@ aiclogit <- function(Y, X) {
   }
   glmout <- summary(glm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
                           X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10], family = binomial))
+  # or: glmout <- summary(glm(Y ~ ., data = X , family = binomial)), if X is a data frame
   # aic <- summary(glmout)$aic # AIC(glmout)
   return(glmout) # well, just habbit..
 }
