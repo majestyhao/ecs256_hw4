@@ -6,8 +6,11 @@ P2b <- function(nrep, sig = FALSE) {
   Y <- runif(nrep, mx - 1, mx + 1)
   
   if (sig == TRUE) {
+    cat("significant test: \n")
     sigTest(Y, X)
+    cat("\n")
   } else {
+    cat("ar2 approach: \n")
     prsm(Y, X[, 1:10], predacc = ar2, printdel = T)
     cat("\n")
     # prsm(Y, X[, 1:10], predacc = aiclogit, printdel = T) # error: y values must be 0 <= y <= 1
@@ -29,7 +32,7 @@ main<- function() {
       f <- FALSE
     for (i in 1:3)
       P2b(nrep)
-    # P2b(nrep, sig = TRUE)
+    P2b(nrep, sig = TRUE)
     nrep <- nrep * 10
   }
 }

@@ -60,7 +60,7 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
         pac[i] <- aiclogit(Y, X)$aic              
       }
     }
-        
+    
     if (identical(predacc, ar2)) {
       nminP <- match(max(pac), pac)
       if (pac[nminP]/PAC[minP] >= 1 - k) {
@@ -83,7 +83,7 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
       }
     }
     PAC[nminP] <- pac[counter]
-       
+    
     if (delFlag == TRUE) {
       # delete the predicator
       # Xb <- X
@@ -100,9 +100,13 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
     delFlag <- FALSE      
   } 
   
+  cat("reserved: ")
   for (i in 1:pN) 
-    if (drop[i] == FALSE)
+    if (drop[i] == FALSE) {
       cat(i)
+      cat(" ")
+    }
+  cat("\n")
 }
 
 # adjusted R^2
@@ -110,34 +114,21 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
 ar2 <- function(Y, X) {
   # call lm()
   # then call summary() to returns the R^2
-  pN <- ncol(X) # less function call.. predictor number
-  sampleN <- nrow(X) # sample size
-  residualCol <- 10 - pN
-  if (residualCol != 0) {
-    for (i in 1:residualCol) {
-      X <- cbind(X, rep(0, sampleN))
-    }
-  }
-  lmout <- summary(lm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
-                        X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10]))
-  # or: lmout <- summary(lm(Y ~ ., data = X , family = binomial)), if X is a data frame
-  
+  X1 <- NULL
+  for (i in 1:ncol(X))
+    X1 <- cbind(X1, X[, i])
+  lmout <- summary(lm(Y ~ X1))
+  # or: lmout <- summary(lm(Y ~ ., data = X), if X is a data frame  
   return(lmout) 
 }
 
 aiclogit <- function(Y, X) {
   # call glm()
   # summary() for the logistic model, AIC value returned
-  pN <- ncol(X) # less function call..
-  sampleN <- nrow(X)
-  residualCol <- 10 - pN
-  if (residualCol != 0) {
-    for (i in 1:residualCol) {
-      X <- cbind(X, rep(0, sampleN))
-    }
-  }
-  glmout <- summary(glm(Y ~ X[, 1] + X[, 2] + X[, 3] + X[, 4] + X[, 5] + 
-                          X[, 6] + X[, 7] + X[, 8] + X[, 9] + X[, 10], family = binomial))
+  X1 <- NULL
+  for (i in 1:ncol(X))
+    X1 <- cbind(X1, X[, i])
+  glmout <- summary(glm(Y ~ X1, family = binomial))
   # or: glmout <- summary(glm(Y ~ ., data = X , family = binomial)), if X is a data frame
   # aic <- summary(glmout)$aic # AIC(glmout)
   return(glmout) # well, just habbit..
