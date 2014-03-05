@@ -6,11 +6,10 @@ Y <- pm[, 9]
 # a <- cbind(1, 2, 3)
 # print(ncol(a))
 X <- NULL
-X <- cbind(X, pm[, 1], pm[, 2], pm[, 6], pm[, 7])
-# X <- cbind(X, pm[, 1], pm[, 2], pm[, 3], pm[, 6], pm[, 7], pm[,8])
+X <- cbind(X, pm[, 1], pm[, 2], pm[, 3], pm[, 4], pm[, 5], pm[,6])
 # print(ncol(X))
-print(summary(lm(Y ~ X)))
+lmout <- summary(lm(Y ~ X[, 1:4]))
+print(lmout)
+print(lmout$coefficients[4, 4])
 # lmout <- summary(lm(Y ~ X[, 2]))
 # print(as.name(rownames(lmout$coefficients)[2]))
-
-

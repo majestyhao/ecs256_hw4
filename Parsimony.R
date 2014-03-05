@@ -18,8 +18,7 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
   # drop <- cbind(0) 
   drop <- c(rep(FALSE, pN)) # predicator for drop
   delFlag <- FALSE
-  conFlag <- TRUE
-  minP <- 0 # min PAC change
+  minP <- 0 # min influential PAC 
   
   if (identical(predacc, ar2)) {
     PAC[pN + 1] <- ar2(Y, X)$adj.r.squared
