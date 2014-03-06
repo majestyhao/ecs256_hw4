@@ -1,0 +1,443 @@
+[1] 100
+k = 0.01, R2 approach: 
+full outcome = 0.4502418
+deleted 8: 
+ new outcome: 0.454785
+deleted 9: 
+ new outcome: 0.4589742
+deleted 5: 
+ new outcome: 0.4619891
+deleted 10: 
+ new outcome: 0.4614113
+deleted 7: 
+ new outcome: 0.4576044
+deleted 6: 
+ new outcome: 0.4537126
+reserved: 1 2 3 4 
+
+k = 0.05, R2 approach: 
+full outcome = 0.3670076
+deleted 4: 
+ new outcome: 0.3729261
+deleted 6: 
+ new outcome: 0.3785619
+deleted 9: 
+ new outcome: 0.3838642
+deleted 7: 
+ new outcome: 0.3884205
+deleted 8: 
+ new outcome: 0.3924927
+deleted 5: 
+ new outcome: 0.3941143
+deleted 10: 
+ new outcome: 0.3923417
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.5005983
+deleted 10: 
+ new outcome: 0.5061441
+deleted 5: 
+ new outcome: 0.5107741
+deleted 8: 
+ new outcome: 0.5134711
+deleted 7: 
+ new outcome: 0.5127449
+deleted 9: 
+ new outcome: 0.5120077
+deleted 4: 
+ new outcome: 0.5107082
+deleted 6: 
+ new outcome: 0.5094225
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.3475272
+deleted 4: 
+ new outcome: 0.3547767
+deleted 5: 
+ new outcome: 0.361649
+deleted 8: 
+ new outcome: 0.3679536
+deleted 9: 
+ new outcome: 0.3697477
+deleted 6: 
+ new outcome: 0.3695023
+deleted 7: 
+ new outcome: 0.3695526
+reserved: 1 2 3 10 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4068662
+deleted 6: 
+ new outcome: 0.4134274
+deleted 9: 
+ new outcome: 0.4196883
+deleted 8: 
+ new outcome: 0.4253151
+deleted 7: 
+ new outcome: 0.4305072
+deleted 5: 
+ new outcome: 0.4351468
+deleted 10: 
+ new outcome: 0.4330133
+deleted 4: 
+ new outcome: 0.4304341
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.3313705
+deleted 9: 
+ new outcome: 0.3383207
+deleted 6: 
+ new outcome: 0.3445219
+deleted 10: 
+ new outcome: 0.3500811
+deleted 5: 
+ new outcome: 0.3545847
+deleted 4: 
+ new outcome: 0.3587339
+deleted 8: 
+ new outcome: 0.3546355
+deleted 7: 
+ new outcome: 0.3489198
+reserved: 1 2 3 
+
+significant test: 
+reserved: 1 2 3 
+
+[1] 1000
+k = 0.01, R2 approach: 
+full outcome = 0.4041998
+deleted 7: 
+ new outcome: 0.4048015
+deleted 10: 
+ new outcome: 0.4053505
+deleted 8: 
+ new outcome: 0.4058813
+deleted 9: 
+ new outcome: 0.4064082
+deleted 6: 
+ new outcome: 0.40692
+deleted 4: 
+ new outcome: 0.4072
+deleted 5: 
+ new outcome: 0.4071695
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.3935191
+deleted 5: 
+ new outcome: 0.3941224
+deleted 8: 
+ new outcome: 0.3943905
+deleted 6: 
+ new outcome: 0.3945928
+deleted 7: 
+ new outcome: 0.3947713
+deleted 9: 
+ new outcome: 0.3948038
+deleted 10: 
+ new outcome: 0.3944753
+deleted 4: 
+ new outcome: 0.3934223
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4302129
+deleted 7: 
+ new outcome: 0.4307884
+deleted 8: 
+ new outcome: 0.4313597
+deleted 6: 
+ new outcome: 0.4319014
+deleted 4: 
+ new outcome: 0.4323457
+deleted 5: 
+ new outcome: 0.4324066
+deleted 9: 
+ new outcome: 0.4318421
+deleted 10: 
+ new outcome: 0.4308579
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4216591
+deleted 10: 
+ new outcome: 0.4222089
+deleted 8: 
+ new outcome: 0.4227352
+deleted 5: 
+ new outcome: 0.4232449
+deleted 9: 
+ new outcome: 0.4237469
+deleted 7: 
+ new outcome: 0.423676
+deleted 6: 
+ new outcome: 0.42348
+deleted 4: 
+ new outcome: 0.4227696
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4559475
+deleted 5: 
+ new outcome: 0.4564517
+deleted 9: 
+ new outcome: 0.4568909
+deleted 7: 
+ new outcome: 0.4572153
+deleted 8: 
+ new outcome: 0.4574811
+deleted 6: 
+ new outcome: 0.4569363
+deleted 10: 
+ new outcome: 0.4557577
+deleted 4: 
+ new outcome: 0.4543999
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4212856
+deleted 6: 
+ new outcome: 0.4218691
+deleted 7: 
+ new outcome: 0.4224345
+deleted 10: 
+ new outcome: 0.4228967
+deleted 8: 
+ new outcome: 0.4230993
+deleted 4: 
+ new outcome: 0.4226126
+deleted 9: 
+ new outcome: 0.4210892
+deleted 5: 
+ new outcome: 0.4150748
+reserved: 1 2 3 
+
+significant test: 
+reserved: 1 2 3 9 
+
+[1] 10000
+k = 0.01, R2 approach: 
+full outcome = 0.4323765
+deleted 7: 
+ new outcome: 0.4324321
+deleted 10: 
+ new outcome: 0.4324855
+deleted 8: 
+ new outcome: 0.4325284
+deleted 6: 
+ new outcome: 0.4325446
+deleted 9: 
+ new outcome: 0.4325524
+deleted 5: 
+ new outcome: 0.4323843
+deleted 4: 
+ new outcome: 0.4315075
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4213208
+deleted 6: 
+ new outcome: 0.4213653
+deleted 7: 
+ new outcome: 0.4214004
+deleted 8: 
+ new outcome: 0.4214219
+deleted 10: 
+ new outcome: 0.4214181
+deleted 5: 
+ new outcome: 0.4213974
+deleted 9: 
+ new outcome: 0.4213207
+deleted 4: 
+ new outcome: 0.4195851
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4315326
+deleted 8: 
+ new outcome: 0.4315895
+deleted 6: 
+ new outcome: 0.4316449
+deleted 9: 
+ new outcome: 0.4316975
+deleted 5: 
+ new outcome: 0.4317438
+deleted 10: 
+ new outcome: 0.4317702
+deleted 7: 
+ new outcome: 0.4314972
+deleted 4: 
+ new outcome: 0.4303576
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4318097
+deleted 7: 
+ new outcome: 0.4318666
+deleted 5: 
+ new outcome: 0.4319202
+deleted 10: 
+ new outcome: 0.4319735
+deleted 6: 
+ new outcome: 0.4320227
+deleted 8: 
+ new outcome: 0.4319926
+deleted 9: 
+ new outcome: 0.431784
+deleted 4: 
+ new outcome: 0.4307639
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4381268
+deleted 7: 
+ new outcome: 0.4381723
+deleted 6: 
+ new outcome: 0.4382021
+deleted 8: 
+ new outcome: 0.4382293
+deleted 9: 
+ new outcome: 0.4382184
+deleted 5: 
+ new outcome: 0.4381647
+deleted 10: 
+ new outcome: 0.4380902
+deleted 4: 
+ new outcome: 0.4370702
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4258378
+deleted 7: 
+ new outcome: 0.4258929
+deleted 5: 
+ new outcome: 0.4259416
+deleted 8: 
+ new outcome: 0.4259833
+deleted 10: 
+ new outcome: 0.4260207
+deleted 6: 
+ new outcome: 0.425968
+deleted 9: 
+ new outcome: 0.4257441
+deleted 4: 
+ new outcome: 0.4240572
+reserved: 1 2 3 
+
+significant test: 
+reserved: 1 2 3 4 9 
+
+[1] 1e+05
+k = 0.01, R2 approach: 
+full outcome = 0.4311054
+deleted 5: 
+ new outcome: 0.4311095
+deleted 9: 
+ new outcome: 0.431113
+deleted 10: 
+ new outcome: 0.4311092
+deleted 8: 
+ new outcome: 0.4311017
+deleted 6: 
+ new outcome: 0.4310927
+deleted 7: 
+ new outcome: 0.4310804
+deleted 4: 
+ new outcome: 0.4294766
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4303798
+deleted 9: 
+ new outcome: 0.4303849
+deleted 6: 
+ new outcome: 0.4303894
+deleted 7: 
+ new outcome: 0.430392
+deleted 10: 
+ new outcome: 0.4303937
+deleted 8: 
+ new outcome: 0.4303881
+deleted 5: 
+ new outcome: 0.4303555
+deleted 4: 
+ new outcome: 0.4288398
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4288637
+deleted 9: 
+ new outcome: 0.4288692
+deleted 8: 
+ new outcome: 0.4288732
+deleted 6: 
+ new outcome: 0.4288728
+deleted 10: 
+ new outcome: 0.4288719
+deleted 5: 
+ new outcome: 0.4288691
+deleted 7: 
+ new outcome: 0.4288654
+deleted 4: 
+ new outcome: 0.4273042
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4303304
+deleted 7: 
+ new outcome: 0.4303343
+deleted 6: 
+ new outcome: 0.4303361
+deleted 10: 
+ new outcome: 0.4303375
+deleted 9: 
+ new outcome: 0.4303388
+deleted 8: 
+ new outcome: 0.4303379
+deleted 5: 
+ new outcome: 0.4303307
+deleted 4: 
+ new outcome: 0.4290952
+reserved: 1 2 3 
+
+k = 0.01, R2 approach: 
+full outcome = 0.4276194
+deleted 6: 
+ new outcome: 0.4276248
+deleted 5: 
+ new outcome: 0.4276299
+deleted 9: 
+ new outcome: 0.4276349
+deleted 10: 
+ new outcome: 0.4276399
+deleted 8: 
+ new outcome: 0.427638
+deleted 7: 
+ new outcome: 0.4276076
+deleted 4: 
+ new outcome: 0.4262482
+reserved: 1 2 3 
+
+k = 0.05, R2 approach: 
+full outcome = 0.4268673
+deleted 5: 
+ new outcome: 0.4268716
+deleted 9: 
+ new outcome: 0.4268757
+deleted 10: 
+ new outcome: 0.4268784
+deleted 7: 
+ new outcome: 0.4268811
+deleted 8: 
+ new outcome: 0.4268831
+deleted 6: 
+ new outcome: 0.4268817
+deleted 4: 
+ new outcome: 0.4254775
+reserved: 1 2 3 
+
+significant test: 
+reserved: 1 2 3 4 

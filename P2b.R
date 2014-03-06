@@ -49,8 +49,8 @@ main<- function() {
       P2b(nrep)
       cat("k = 0.05, ")
       P2b(nrep, k = 0.05)
-    }
-    P2b(nrep, sig = TRUE)
+      P2b(nrep, sig = TRUE)
+    }    
     nrep <- nrep * 10
   }
 }
