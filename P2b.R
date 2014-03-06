@@ -47,10 +47,14 @@ main<- function() {
     for (i in 1:3) {
       cat("k = 0.01, ")
       P2b(nrep)
+    }    
+    for (i in 1:3) {
       cat("k = 0.05, ")
       P2b(nrep, k = 0.05)
-      P2b(nrep, sig = TRUE)
     }    
+    for (i in 1:3) {
+      P2b(nrep, sig = TRUE)
+    }          
     nrep <- nrep * 10
   }
 }
