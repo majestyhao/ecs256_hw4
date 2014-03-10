@@ -70,13 +70,13 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
       crit <- min
     } else {      
       crit <- max
-      }
-      
+    }
+    
     if (identical(crit, min)) {
       nminP <- match(max(pac), pac)
-    if (pac[nminP]/PAC[minP] >= 1 - k) {
-      delFlag <- TRUE
-    } 
+      if (pac[nminP]/PAC[minP] >= 1 - k) {
+        delFlag <- TRUE
+      } 
     } else {
       nminP <- match(min(pac), pac)
       if (pac[nminP]/PAC[minP] < 1 + k) {
@@ -101,11 +101,11 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
       drop[nminP] = TRUE
       minP <- nminP
       if (printdel == TRUE) {
-      cat("deleted ")
-      cat(colnames(Xb)[nminP])
-      cat("\n new outcome = ")
-      cat(PAC[nminP])         
-      cat("\n")
+        cat("deleted ")
+        cat(colnames(Xb)[nminP])
+        cat("\n new outcome = ")
+        cat(PAC[nminP])         
+        cat("\n")
       }
     }  else {
       break
@@ -146,7 +146,6 @@ aiclogit <- function(Y, X) {
   # aic <- summary(glmout)$aic # AIC(glmout)
   return(glmout) # well, just habbit..
 }
-
 
 main <- function() {
   pm <- read.table("pima-indians-diabetes.data", header = T, sep = ",", row.names=NULL)
