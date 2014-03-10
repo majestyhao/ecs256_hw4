@@ -12,6 +12,12 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
   # crit: Either "max" or "min"
   # printdel: "progress report" as the computation proceeds. 
   
+  if (!is.matrix(X)) 
+    X <- as.matrix(X)
+  
+  if (!is.matrix(Y)) 
+    Y <- as.matrix(Y)
+  
   PAC <- rep(0, ncol(X) + 1)
   pN <- ncol(X)
   Xb <- X # backup for X
@@ -61,10 +67,16 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
     }
     
     if (identical(predacc, ar2)) {
+      crit <- min
+    } else {      
+      crit <- max
+      }
+      
+    if (identical(crit, min)) {
       nminP <- match(max(pac), pac)
-      if (pac[nminP]/PAC[minP] >= 1 - k) {
-        delFlag <- TRUE
-      } 
+    if (pac[nminP]/PAC[minP] >= 1 - k) {
+      delFlag <- TRUE
+    } 
     } else {
       nminP <- match(min(pac), pac)
       if (pac[nminP]/PAC[minP] < 1 + k) {
@@ -88,11 +100,13 @@ prsm <- function(Y, X, k = 0.01, predacc = ar2, crit = NULL, printdel = F) {
       # Xb <- X
       drop[nminP] = TRUE
       minP <- nminP
+      if (printdel == TRUE) {
       cat("deleted ")
-      cat(nminP)
-      cat(": \n new outcome: ")
+      cat(colnames(Xb)[nminP])
+      cat("\n new outcome = ")
       cat(PAC[nminP])         
       cat("\n")
+      }
     }  else {
       break
     }

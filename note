@@ -2,6 +2,12 @@ R2 shows the linear relationship between the independent variables and the depen
 
 The Adjusted R2 is attempting to account for statistical shrinkage. Models with tons of predictors tend to perform better in sample than when tested out of sample. The adjusted R2 "penalizes" you for adding the extra predictor variables that don't improve the existing model. It can be helpful in model selection. Adjusted R2 will equal R2 for one predictor variable. As you add variables, it will be smaller than R2.
 
+coefficients  
+a p x 4 matrix with columns for the estimated coefficient, its standard error, t-statistic and corresponding (two-sided) p-value. Aliased coefficients are omitted.
+
+aliased	
+named logical vector showing if the original coefficients are aliased.
+
 ar2(pm[,9], pm[, 1:8])
 
 for (i in 1:sampleN) {
